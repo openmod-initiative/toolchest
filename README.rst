@@ -5,8 +5,8 @@ This project serves as a catch-all for openmod devs' useful python tools and
 APIs (though we are generally language lovers and are not limited to Python
 specifically).
 
-For the forseeable future, this repo is a bit adhoc -- anything of use that fits
-the general theme of enegy modelling is welcome. We try to split additions by
+For the foreseeable future, this repo is a bit adhoc -- anything of use that fits
+the general theme of energy modeling is welcome. We try to split additions by
 subject into the appropriate files (e.g., GIS-related work to `gis.py`, etc.).
 
 The contributors to this repository strive to write clear, understandable,
@@ -24,7 +24,7 @@ in depth discussions.
 Dependencies
 ------------
 
-As this is a hodgepodge of tools, different tooling requires differnt
+As this is a hodgepodge of tools, different tooling requires different
 dependencies.
 
 General
@@ -99,10 +99,13 @@ Follow the above instructions replacing ``make`` with ``./make.bat``.
 Contributing
 -------------
 
-`toolchest` follows a `develop`-`master` `git`-based release workflow. In short,
-all new additions are pulled into the `develop` branch, and the `master` branch
-is updated upon a new release. We follow
-[semantic versioning](http://semver.org/) for version numbering.
+`toolchest` currently follows a `master`-branch based work flow. All features
+introduced in pull requests are merged directly into `master`. Should the code
+base become more complex, it is likely that we will transition to a
+`develop`-`master` `git`-based release work flow, as described
+[here](http://nvie.com/posts/a-successful-git-branching-model/).
+
+We follow [semantic versioning](http://semver.org/) for version numbering.
 
 Any contribution can be pulled into `develop` via a *Pull Request* provided it
 meets the following conditions:
@@ -115,20 +118,20 @@ meets the following conditions:
 0. is reviewed by at least one other contributor
 
 Documentation Caveat
-+++++++++++++++++++++
+++++++++++++++++++++
 
 Contributions that upgrade *only* documentation are the sole caveat to the above
 requirements. Documentation-only additions can be pushed directly to the
 `develop` branch. However, if a review is desired, they can of course go through
 the process as well.
 
-Following Syle Guides
-+++++++++++++++++++++
+Following Style Guides
+++++++++++++++++++++++
 
 Style guides are always annoying to follow at first but are
 [immensely useful](http://da-data.blogspot.com/2016/04/stealing-googles-coding-practices-for.html). Feel
 free to hook in [`autopep8`](https://pypi.python.org/pypi/autopep8) to your
-favorite editor to automatically fix any sytle issues. For `emacs`, you can add
+favorite editor to automatically fix any style issues. For `emacs`, you can add
 the following lines
 
 ```
@@ -141,5 +144,5 @@ Conflicts between Contributors
 ------------------------------
 
 Should any conflicts arise in the course of the project, without any other
-particularly good solutoin, resolution will follow a majority rule on the
+particularly good solution, resolution will follow a majority rule on the
 listserv.

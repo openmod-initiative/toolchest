@@ -1,41 +1,65 @@
-A Python Project Stub
-=====================
+Openmod's Python Toolchest
+==========================
 
-This is a stub for a new python project. It contains the following features:
+This project serves as a catch-all for openmod devs' useful python tools and
+APIs (though we are generally language lovers and are not limited to Python
+specifically).
 
-1. Installable module
-2. Unit tests
-3. Continuous integration on Linux and Windows
-4. Automatic documentation
+For the foreseeable future, this repo is a bit adhoc -- anything of use that fits
+the general theme of energy modeling is welcome. We try to split additions by
+subject into the appropriate files (e.g., GIS-related work to `gis.py`, etc.).
+
+The contributors to this repository strive to write clear, understandable,
+tested, and documented code. We recognize this requires a nontrivial effort and
+respect the effort of others by being willing to review pull requests and
+otherwise offer comments, critiques, and first-user experiences.
+
+Communication
+-------------
+
+Apart from using the issue tracker, please join the
+[listserv](https://groups.google.com/forum/#!forum/openmod-initiative) for any
+in depth discussions.
 
 Dependencies
 ------------
 
-This stub depends on
+As this is a hodgepodge of tools, different tooling requires different
+dependencies.
 
-1. `nose <https://pypi.python.org/pypi/nose/1.3.7>`_
-2. `Sphinx <https://pypi.python.org/pypi/Sphinx>`_
+General
++++++++
 
-Making a New Project
---------------------
+0. numpy
+0. pandas
+0. scipy
 
-Choose a project name and run the following commands replacing ``<project
-name>`` with your choice::
+GIS
++++
 
-    git clone https://github.com/gidden/toolchest.git <project name>
-    cd <project name>
-    ./make_proj.sh <project name>
+0. fiona
+0. rasterio
+0. shapely
 
-You should now have a fresh new repository with your project ready to go. You
-can sync it with Github via::
+Modeling & Optimization
++++++++++++++++++++++++
 
-    git remote add origin git@github.com:<user name>/<project name>
-    git push origin master
+0. pyomo
+
+Testing
++++++++ 
+
+0. `nose <https://pypi.python.org/pypi/nose/1.3.7>`_
+
+Documentation
++++++++++++++
+
+0. `Sphinx <https://pypi.python.org/pypi/Sphinx>`_
 
 Installing
 ----------
 
-You can install the stub like any other python module::
+You can install `toolchest` like any other python module::
 
     ./setup.py install
 
@@ -50,40 +74,8 @@ From the root directory, run::
 
     nosetests -w tests
 
-Continuous Integration
------------------------
-
-Once you have added your project to Github (or any other supported service), you
-can turn on continuous integration. Once turned on, future pull requests will be
-automatically tested.
-
-Linux builds are tested on TravisCI. You can turn on the new project at
-``https://travis-ci.com/profile/<user name>`` if the repository is *private* or
-``https://travis-ci.org/profile/<user name>`` if the repository is
-*public*. 
-
-Windows builds are tested on `Appveyor <https://ci.appveyor.com/projects>`_. You
-can add it by clicking the "New Project" button.
-
 Documentation
---------------
-
-On ReadTheDocs
-~~~~~~~~~~~~~~~
-
-This repository currently has its documentation on `ReadTheDocs
-<http://toolchest.readthedocs.org/en/latest/>`_. You can add any new project and
-have it automatically hosted by doing the following
-
-- on Github
-
-  - Setting -> Webhooks and Services-> Add Service -> ReadTheDocs
-
-- on ReadTheDocs
-
-  - Add the project
-  - On readthedocs.org/projects/<project name>, do Admin -> Advanced Settings ->
-    Check the "Install Project" Box at the top
+-------------
 
 On *Nix Platforms
 ~~~~~~~~~~~~~~~~~
@@ -103,3 +95,54 @@ On Windows
 ~~~~~~~~~~~~~~~~~
 
 Follow the above instructions replacing ``make`` with ``./make.bat``.
+
+Contributing
+-------------
+
+`toolchest` currently follows a `master`-branch based work flow. All features
+introduced in pull requests are merged directly into `master`. Should the code
+base become more complex, it is likely that we will transition to a
+`develop`-`master` `git`-based release work flow, as described
+[here](http://nvie.com/posts/a-successful-git-branching-model/).
+
+We follow [semantic versioning](http://semver.org/) for version numbering.
+
+Any contribution can be pulled into `develop` via a *Pull Request* provided it
+meets the following conditions:
+
+0. follows [pep8](https://www.python.org/dev/peps/pep-0008/) style
+0. is documented with docstrings formatted in the
+  [numpy style](http://sphinxcontrib-napoleon.readthedocs.io/en/latest/example_numpy.html)
+0. is tested
+0. passes CI on both Windows and Linux
+0. is reviewed by at least one other contributor
+
+Documentation Caveat
+++++++++++++++++++++
+
+Contributions that upgrade *only* documentation are the sole caveat to the above
+requirements. Documentation-only additions can be pushed directly to the
+`develop` branch. However, if a review is desired, they can of course go through
+the process as well.
+
+Following Style Guides
+++++++++++++++++++++++
+
+Style guides are always annoying to follow at first but are
+[immensely useful](http://da-data.blogspot.com/2016/04/stealing-googles-coding-practices-for.html). Feel
+free to hook in [`autopep8`](https://pypi.python.org/pypi/autopep8) to your
+favorite editor to automatically fix any style issues. For `emacs`, you can add
+the following lines
+
+```
+; see https://github.com/paetzke/py-autopep8.el
+(require 'py-autopep8)
+(add-hook 'python-mode-hook 'py-autopep8-enable-on-save)
+```
+
+Conflicts between Contributors
+------------------------------
+
+Should any conflicts arise in the course of the project, without any other
+particularly good solution, resolution will follow a majority rule on the
+listserv.

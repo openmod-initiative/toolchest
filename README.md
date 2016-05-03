@@ -42,41 +42,51 @@ dependencies.
 
 ### Testing
 
-0. `nose <https://pypi.python.org/pypi/nose/1.3.7>`_
+0. [nose](https://pypi.python.org/pypi/nose/1.3.7)
 
 ### Documentation
 
-0. `Sphinx <https://pypi.python.org/pypi/Sphinx>`_
+0. [Sphinx](https://pypi.python.org/pypi/Sphinx)
 
 ## Installing
 
-You can install `toolchest` like any other python module::
+You can install `toolchest` like any other python module
 
-    ./setup.py install
+```
+./setup.py install
+```
 
-or for local installations::
+or for local installations
 
-    ./setup.py install --user
+```
+./setup.py install --user
+```
 
 ## Testing
 
-From the root directory, run::
+From the root directory, run
 
-    nosetests -w tests
+```
+nosetests -w tests
+```
 
 ## Documentation
 
 ### On *Nix Platforms
 
-After you install the project locally, you can generate documentation by::
+After you install the project locally, you can generate documentation by
 
-    cd docs
-    make html
+```
+cd docs
+make html
+```
 
-You can serve the documentation locally via::
+You can serve the documentation locally via
 
-    make serve
-	
+```
+make serve
+```
+
 You can then view the docs at http://localhost:8000/build/html/
 
 ### On Windows

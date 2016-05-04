@@ -103,7 +103,7 @@ base become more complex, it is likely that we will transition to a
 
 We follow [semantic versioning](http://semver.org/) for version numbering.
 
-Any contribution can be pulled into `develop` via a *Pull Request* provided it
+Any contribution can be pulled into `master` via a *Pull Request* provided it
 meets the following conditions:
 
 0. follows [pep8](https://www.python.org/dev/peps/pep-0008/) style

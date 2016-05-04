@@ -117,7 +117,7 @@ meets the following conditions:
 
 Contributions that upgrade *only* documentation are the sole caveat to the above
 requirements. Documentation-only additions can be pushed directly to the
-`develop` branch. However, if a review is desired, they can of course go through
+`master` branch. However, if a review is desired, they can of course go through
 the process as well.
 
 ### Following Style Guides

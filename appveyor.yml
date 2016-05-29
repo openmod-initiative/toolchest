@@ -38,7 +38,7 @@ install:
 
   # Dependencies and package install
   - conda install --yes numpy scipy nose pandas
-  - conda install -c conda-forge pyomo
+  - conda install --yes -c conda-forge pyomo
   - python setup.py install
 
 build: false

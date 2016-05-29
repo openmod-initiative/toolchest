@@ -21,6 +21,7 @@ before_install:
 # Install packages
 install:
   - conda install --yes python=$TRAVIS_PYTHON_VERSION numpy scipy nose pandas
+  - conda install -c conda-forge pyomo
   - python setup.py install --user
 
 # Run test

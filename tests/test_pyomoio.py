@@ -1,4 +1,5 @@
-from nose.tools import assert_equal, assert_is_instance, assert_true
+from nose.tools import (assert_almost_equal, assert_equal, assert_is_instance, 
+                        assert_true)
 from numpy import isclose
 from toolchest import pyomoio
 import pyomo.environ
@@ -73,4 +74,10 @@ def test_get_entity_param():
     m = transp_setup()
     sum_of_distances = pyomoio.get_entity(m, 'distance').sum()
     assert_true(isclose(sum_of_distances, 11.7))
+
+def test_get_entities_param():
+    m = transp_setup()
+    capacity_and_demand = pyomoio.get_entities(m, ['capacity', 'demand'])
+    assert_almost_equal(dict(capacity_and_demand.sum(axis=0)),
+                        {'capacity': 950.0, 'demand': 900.0})
 

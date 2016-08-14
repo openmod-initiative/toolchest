@@ -1,4 +1,5 @@
 from nose.tools import assert_equal, assert_is_instance, assert_true
+from numpy import isclose
 from toolchest import pyomoio
 import pyomo.environ
 import pyomo.core as pyomo
@@ -51,10 +52,6 @@ def transp_setup():
     m.con_supply = pyomo.Constraint(m.plants, rule=supply_rule)
     m.con_demand = pyomo.Constraint(m.markets, rule=demand_rule)
     return m
-    
-def isclose(a, b, rel_tol=1e-09, abs_tol=0.0):
-    """source: https://docs.python.org/3/library/math.html#math.isclose"""
-    return abs(a-b) <= max(rel_tol * max(abs(a), abs(b)), abs_tol)
 
 def test_transp_setup():
     assert_is_instance(transp_setup(), pyomo.ConcreteModel)
@@ -74,5 +71,6 @@ def test_list_entities_param():
 
 def test_get_entity_param():
     m = transp_setup()
-    sum_of_distances = pyomoio.get_entity(m, 'distance')['distance'].sum()
+    sum_of_distances = pyomoio.get_entity(m, 'distance').sum()
     assert_true(isclose(sum_of_distances, 11.7))
+

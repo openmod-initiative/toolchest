@@ -11,16 +11,19 @@ import pyomo.core as pyomo
 import pandas as pd
 
 def get_entity(instance, name):
-    """Return a DataFrame for an entity in model instance
+    """Return a Series for an entity in model instance.
     
     Parameters
     ----------
-    instance: a Pyomo ConcreteModel instance
-    name: str, name of a Set, Param, Var, Constraint or Objective in instance
+    instance : pyomo.ConcreteModel
+        The model object from which to retrieve the entity.
+    name : str
+        Name of a Set, Param, Var, Constraint or Objective in `instance`.
     
     Returns
     -------
-    a single-columned Pandas DataFrame with domain as index
+    pandas.Series
+        Series of values (or 1's, in case of a Set) for entity `name`.
     """
 
     # retrieve entity, its type and its onset names
@@ -38,11 +41,11 @@ def get_entity(instance, name):
         # unconstrained supersets
         if not labels:
             labels = [name]
-            name = name+'_'
+            name = name + '_'
 
     elif isinstance(entity, pyomo.Param):
         if entity.dim() > 1:
-            results = pd.DataFrame([v[0]+(v[1],) for v in entity.items()])
+            results = pd.DataFrame([v[0] + (v[1],) for v in entity.items()])
         else:
             results = pd.DataFrame(entity.items())
     else:
@@ -51,7 +54,7 @@ def get_entity(instance, name):
             # concatenate index tuples with value if entity has
             # multidimensional indices v[0]
             results = pd.DataFrame(
-                [v[0]+(v[1].value,) for v in entity.items()])
+                [v[0] + (v[1].value,) for v in entity.items()])
         else:
             # otherwise, create tuple from scalar index v[0]
             results = pd.DataFrame(
@@ -67,6 +70,9 @@ def get_entity(instance, name):
         # name columns according to labels + entity name
         results.columns = labels + [name]
         results.set_index(labels, inplace=True)
+        
+        # convert to Series
+        results = results[name]
 
     return results
 
@@ -79,12 +85,17 @@ def get_entities(instance, names):
     
     Parameters
     ----------
-    instance: a Pyomo ConcreteModel instance
-    names: list of entity names (as returned by list_entities)
+    instance : pyomo.ConcreteModel
+        The model object from which to retrieve the entity.
+
+    names : list of str 
+        A list of entity names (as returned by function `list_entities`).
     
     Returns
     -------
-    a Pandas DataFrame with entities as columns and domains as index
+    pandas.DataFrame
+        A DataFrame with entities as columns and the union of their domains as 
+        a row index.
     """
 
     df = pd.DataFrame()
@@ -92,7 +103,7 @@ def get_entities(instance, names):
         other = get_entity(instance, name)
 
         if df.empty:
-            df = other
+            df = other.to_frame()
         else:
             index_names_before = df.index.names
 
@@ -105,16 +116,20 @@ def get_entities(instance, names):
 
 
 def list_entities(instance, entity_type):
-    """Return list of sets, params, variables, constraints or objectives
+    """Return list of sets, params, variables, constraints or objectives.
     
     Parameters
     ----------
-    instance: a Pyomo ConcreteModel object
-    entity_type: one of "set", "par", "var", "con" or "obj"
+    instance : pyomo.ConcreteModel
+        The model object from which to list the entities.
+        
+    entity_type : {"set", "par", "var", "con", "obj"}
+        Type of entity to be listed.
     
     Returns
     -------
-    DataFrame of entities
+    pandas.DataFrame
+        DataFrame of entities with name, domain and description (if specified).
 
     Example
     -------
@@ -163,12 +178,13 @@ def _get_onset_names(entity):
     
     Parameters
     ----------
-    entity: a member entity (i.e. a Set, Param, Var, Objective, Constraint)
-            of a Pyomo ConcreteModel object
-                
+    entity: Set, Param, Var, Objective, Constraint 
+        A member entity of a pyomo.ConcreteModel object.
+
     Returns
     -------
-    list of domain set names for that entity
+    list of str
+        A list of domain set names for `entity`
         
     Example
     -------
@@ -203,7 +219,7 @@ def _get_onset_names(entity):
             pass
 
     elif isinstance(entity, (pyomo.Param, pyomo.Var, pyomo.Constraint,
-                    pyomo.Objective)):
+                             pyomo.Objective)):
         if entity.dim() > 0 and entity._index:
             labels = _get_onset_names(entity._index)
         else:
